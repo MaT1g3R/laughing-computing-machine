@@ -1,11 +1,58 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
 version: 2.1
-workflows:
-  testing:
-    jobs:
-      - runner
+
 jobs:
-  runner:
-    machine: true
-    resource_class: mat1g3r/my-runner-resource-class
+  feature-tests:
+    resource_class: small
+    parallelism: 12
+    docker:
+      - image: circleci/ruby:2.7.3
     steps:
-      - run: echo "Hi I'm on Runners!"
+      - checkout
+      - restore_cache:
+          keys:
+            - gems-v2-{{ checksum "Gemfile.lock" }}
+            - gems-v2-
+      - run:
+          name: install app dependencies
+          command: |
+            gem update --system
+            gem install --force bundler
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - attach_workspace:
+          at: .
+      - restore_cache:
+         keys:
+           - client-build-v6-{{ checksum "client-version.txt" }}
+
+  non-feature-tests:
+    resource_class: small
+    parallelism: 4
+    docker:
+      - image: circleci/ruby:2.7.3
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gems-v2-{{ checksum "Gemfile.lock" }}
+            - gems-v2-
+      - run:
+          name: install app dependencies
+          command: |
+            gem update --system
+            gem install --force bundler
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: gems-v2-{{ checksum "Gemfile.lock" }}
+
+workflows:
+  the_workflow:
+    jobs:
+      - non-feature-tests
+      - feature-tests
