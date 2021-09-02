@@ -4,6 +4,8 @@
 #
 version: 2.1
 
+build_agent: 1.0
+
 jobs:
   feature-tests:
     resource_class: small
