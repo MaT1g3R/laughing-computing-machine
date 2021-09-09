@@ -6,6 +6,7 @@ jobs:
     docker:
       - image: alpine
     steps:
+      - checkout
       - run:
           name: generate garbage test results
           command: |
