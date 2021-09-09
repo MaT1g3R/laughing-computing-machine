@@ -11,7 +11,7 @@ jobs:
           command: |
             echo hi > a.xml
       - store_test_results:
-          path: a.xml
+          path: large.xml
 
 workflows:
   the_workflow:
