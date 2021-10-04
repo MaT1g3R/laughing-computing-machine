@@ -16,7 +16,7 @@ jobs:
           root: /tmp/dir
           paths:
             - foo
-      - attach_to_workspace:
+      - attach_workspace:
           at: /tmp/dir
       - restore_cache:
           keys:
