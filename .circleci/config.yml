@@ -10,19 +10,20 @@ jobs:
       - run:
           name: make workspace
           command: |
-            mkdir -p /tmp/dir/foo
-            echo aaaaaa > /tmp/dir/foo/a
+            mkdir -p /tmp/dir2/foo
+            echo aaaaaa > /tmp/dir2/foo/a
+            echo bbbbbb > /tmp/dir2/foo/b
       - persist_to_workspace:
-          root: /tmp/dir
+          root: /tmp/dir2
           paths:
             - foo
       - attach_workspace:
-          at: /tmp/dir
+          at: /tmp/dir2
       - restore_cache:
           keys:
             - rspec
       - save_cache:
-          key: rspec-2
+          key: rspec-3
           paths:
             - rspec.xml
       - store_test_results:
