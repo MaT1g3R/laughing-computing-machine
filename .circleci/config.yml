@@ -22,7 +22,7 @@ jobs:
           keys:
             - rspec
       - save_cache:
-          key: rspec-1
+          key: rspec-2
           paths:
             - rspec.xml
       - store_test_results:
