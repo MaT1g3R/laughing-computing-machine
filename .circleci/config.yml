@@ -1,12 +1,22 @@
 version: '2.1'
 
 jobs:
+  deploy:
+    resource_class: small
+    docker:
+      - image: alpine
+    steps:
+      - attach_workspace:
+          at: /tmp/dir2
+      - run:
+          name: deploy
+          command: echo yes
+
   tests:
     resource_class: small
     docker:
       - image: alpine
     steps:
-      - checkout
       - run:
           name: make workspace
           command: |
@@ -17,20 +27,21 @@ jobs:
           root: /tmp/dir2
           paths:
             - foo
-      - attach_workspace:
-          at: /tmp/dir2
       - restore_cache:
           keys:
             - rspec
       - save_cache:
-          key: rspec-3
+          key: rspec-4
           paths:
             - rspec.xml
       - store_test_results:
           path: rspec.xml
       - store_artifacts:
           path: rspec.xml
+
 workflows:
   the_workflow:
     jobs:
       - tests
+      - deploy:
+          requires: tests
