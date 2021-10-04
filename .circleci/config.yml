@@ -8,12 +8,27 @@ jobs:
     steps:
       - checkout
       - run:
-          name: generate garbage test results
+          name: make workspace
           command: |
-            echo hi > a.xml
+            mkdir -p /tmp/dir/foo
+            echo aaaaaa > /tmp/dir/foo/a
+      - persist_to_workspace:
+          root: /tmp/dir
+          paths:
+            - foo
+      - attach_to_workspace:
+          at: /tmp/dir
+      - restore_cache:
+          keys:
+            - rspec
+      - save_cache:
+          key: rspec
+          paths:
+            - rspec.xml
       - store_test_results:
-          path: large.xml.0
-
+          path: rspec.xml
+      - store_artifacts:
+          path: rspec.xml
 workflows:
   the_workflow:
     jobs:
