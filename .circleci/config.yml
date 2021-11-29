@@ -1,47 +1,19 @@
-version: '2.1'
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
 
 jobs:
-  deploy:
-    resource_class: small
-    docker:
-      - image: alpine
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
     steps:
-      - attach_workspace:
-          at: /tmp/dir2
+      - checkout
+      - run: systeminfo
       - run:
-          name: deploy
-          command: echo yes
-
-  tests:
-    resource_class: small
-    docker:
-      - image: alpine
-    steps:
-      - run:
-          name: make workspace
+          name: "Check docker"
+          shell: powershell.exe
           command: |
-            mkdir -p /tmp/dir2/foo
-            echo aaaaaa > /tmp/dir2/foo/a
-            echo bbbbbb > /tmp/dir2/foo/b
-      - persist_to_workspace:
-          root: /tmp/dir2
-          paths:
-            - foo
-      - restore_cache:
-          keys:
-            - rspec
-      - save_cache:
-          key: rspec-4
-          paths:
-            - rspec.xml
-      - store_test_results:
-          path: rspec.xml
-      - store_artifacts:
-          path: rspec.xml
-
-workflows:
-  the_workflow:
-    jobs:
-      - tests
-      - deploy:
-          requires: [tests]
+            docker info
+            docker run hello-world:nanoserver-1809
