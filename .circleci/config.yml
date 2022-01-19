@@ -1,19 +1,52 @@
-version: 2.1
-
-orbs:
-  win: circleci/windows@2.2.0
+version: '2.1'
 
 jobs:
-  build:
-    executor:
-      name: win/default
-      shell: powershell.exe
+  store-old:
+    resource_class: small
+    docker:
+      - image: alpine
     steps:
-      - checkout
-      - run: systeminfo
       - run:
-          name: "Check docker"
-          shell: powershell.exe
+          name: make file
           command: |
-            docker info
-            docker run hello-world:nanoserver-1809
+            mkdir -p /tmp/ws
+            echo old > /tmp/ws/old
+      - persist_to_workspace:
+          root: /tmp/ws
+          paths:
+            - old
+  store-new:
+    resource_class: small
+    docker:
+      - image: alpine
+    steps:
+      - run:
+          name: make file
+          command: |
+            mkdir -p /tmp/ws
+            echo new > /tmp/ws/new
+      - persist_to_workspace:
+          root: /tmp/ws
+          paths:
+            - new
+  restore:
+    resource_class: small
+    docker:
+      - image: alpine
+    steps:
+      - attach_workspace:
+          at: /tmp/ws
+      - run:
+          name: assert ws
+          command: |
+            cat /tmp/ws/old
+            cat /tmp/ws/new
+
+workflow:
+  main:
+    jobs:
+      - store-old
+      - hold:
+          type: approval
+      - store-new
+      - restore
