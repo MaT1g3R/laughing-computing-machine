@@ -42,7 +42,8 @@ jobs:
             cat /tmp/ws/old
             cat /tmp/ws/new
 
-workflow:
+workflows:
+  version: 2
   main:
     jobs:
       - store-old
