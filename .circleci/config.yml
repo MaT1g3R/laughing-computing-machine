@@ -49,5 +49,12 @@ workflows:
       - store-old
       - hold:
           type: approval
-      - store-new
-      - restore
+      - store-new:
+          requires:
+            - store-old
+            - hold
+      - restore:
+          requires:
+            - store-old
+            - hold
+            - store-new
