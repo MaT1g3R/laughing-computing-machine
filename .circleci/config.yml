@@ -4,15 +4,17 @@ jobs:
   store-old:
     resource_class: small
     docker:
-      - image: minio/minio
-    environment:
-      MINIO_ROOT_USER: 'minio'
-      MINIO_ROOT_PASSWORD: 'minio123'
+      - image: alpine
+      - image: 'quay.io/minio/minio'
+        environment:
+          MINIO_ROOT_USER: 'minio'
+          MINIO_ROOT_PASSWORD: 'minio123'
+        command: ['server', '--json', '--address', ':9123', '--console-address', ':9001', '/data']
     steps:
       - run:
           name: do it
           command: |
-            minio server --address :9123 /data
+            curl -I http://localhost:9123/minio/health/live
 
 workflows:
   version: 2
