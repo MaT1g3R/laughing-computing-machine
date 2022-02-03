@@ -4,57 +4,18 @@ jobs:
   store-old:
     resource_class: small
     docker:
-      - image: alpine
+      - image: minio/minio
+    environment:
+      MINIO_ROOT_USER: 'minio'
+      MINIO_ROOT_PASSWORD: 'minio123'
     steps:
       - run:
-          name: make file
+          name: do it
           command: |
-            mkdir -p /tmp/ws
-            echo old > /tmp/ws/old
-      - persist_to_workspace:
-          root: /tmp/ws
-          paths:
-            - old
-  store-new:
-    resource_class: small
-    docker:
-      - image: alpine
-    steps:
-      - run:
-          name: make file
-          command: |
-            mkdir -p /tmp/ws
-            echo new > /tmp/ws/new
-      - persist_to_workspace:
-          root: /tmp/ws
-          paths:
-            - new
-  restore:
-    resource_class: small
-    docker:
-      - image: alpine
-    steps:
-      - attach_workspace:
-          at: /tmp/ws
-      - run:
-          name: assert ws
-          command: |
-            cat /tmp/ws/old
-            cat /tmp/ws/new
+            minio server --address :9123 /data
 
 workflows:
   version: 2
   main:
     jobs:
       - store-old
-      - hold:
-          type: approval
-      - store-new:
-          requires:
-            - store-old
-            - hold
-      - restore:
-          requires:
-            - store-old
-            - hold
-            - store-new
