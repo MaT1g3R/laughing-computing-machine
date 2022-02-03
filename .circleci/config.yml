@@ -14,6 +14,10 @@ jobs:
       - run:
           name: do it
           command: |
+            apk add curl
+      - run:
+          name: do it
+          command: |
             curl -I http://localhost:9123/minio/health/live
 
 workflows:
