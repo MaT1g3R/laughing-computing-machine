@@ -5,21 +5,16 @@ jobs:
     resource_class: small
     docker:
       - image: alpine
-      - image: minio/minio
-        environment:
-          MINIO_ROOT_USER: 'minio'
-          MINIO_ROOT_PASSWORD: 'minio123'
-          CI: 'true'
-        command: ['server', '--json', '--address', ':9123', '/data']
+    parallelism: 10
     steps:
       - run:
           name: do it
           command: |
-            apk add curl
-      - run:
-          name: do it
-          command: |
-            sleep 5 && curl -I http://localhost:9123/minio/health/live
+            echo aaaaaaaa > a
+      - save_cache:
+          paths:
+            - ./a
+          key: a-key
 
 workflows:
   version: 2
