@@ -7,6 +7,9 @@ jobs:
       - image: alpine
     steps:
       - checkout
+      - run:
+          command: |
+            whoami
       - store_test_results:
           path: ./test-results
       - store_artifacts:
