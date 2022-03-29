@@ -5,16 +5,11 @@ jobs:
     resource_class: small
     docker:
       - image: alpine
-    parallelism: 10
     steps:
-      - run:
-          name: do it
-          command: |
-            echo aaaaaaaa > a
-      - save_cache:
-          paths:
-            - ./a
-          key: a-key
+      - store_test_results:
+          path: .
+      - store_artifacts:
+          path: .
 
 workflows:
   version: 2
