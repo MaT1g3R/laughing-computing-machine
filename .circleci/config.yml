@@ -13,9 +13,9 @@ jobs:
             mkdir -p ../test-reports/server/
             cp ./rspec.xml ../test-reports/server/
       - store_test_results:
-          path: ../test-results
+          path: ../test-reports
       - store_artifacts:
-          path: ../test-results
+          path: ../test-reports
 
 workflows:
   version: 2
