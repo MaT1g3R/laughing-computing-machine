@@ -7,14 +7,15 @@ jobs:
       - image: alpine
     steps:
       - checkout
-      - run:
+     - run:
+          name: Collect Test Reports
           command: |
-            whoami
-            chmod 0400 -R ./test-results
+            mkdir -p ../test-reports/server/
+            cp ./rspec.xml ../test-reports/server/
       - store_test_results:
-          path: ./test-results
+          path: ../test-results
       - store_artifacts:
-          path: ./test-results
+          path: ../test-results
 
 workflows:
   version: 2
