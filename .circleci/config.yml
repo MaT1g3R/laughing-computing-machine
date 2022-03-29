@@ -7,7 +7,7 @@ jobs:
       - image: alpine
     steps:
       - checkout
-     - run:
+      - run:
           name: Collect Test Reports
           command: |
             mkdir -p ../test-reports/server/
