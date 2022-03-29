@@ -8,14 +8,14 @@ jobs:
     docker:
       - image: alpine
     steps:
-      - checkout
       - run:
           name: Collect Test Reports
           command: |
-            mkdir -p ../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
-            cp ./rspec.xml ../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
+            echo a > ./rspec.xml
+            mkdir -p ../../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
+            cp ./rspec.xml ../../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
       - store_artifacts:
-          path: ../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
+          path: ../../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
 
 workflows:
   version: 2
