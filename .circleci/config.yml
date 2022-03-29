@@ -1,3 +1,5 @@
+# project id: 96809a41-b0ec-48af-bff6-8b6feea449d4
+# job id: b2cb2653-cc4d-412c-ac74-70873bb302aa
 version: '2.1'
 
 jobs:
@@ -10,12 +12,10 @@ jobs:
       - run:
           name: Collect Test Reports
           command: |
-            mkdir -p ../test-reports/server/
-            cp ./rspec.xml ../test-reports/server/
-      - store_test_results:
-          path: ../test-reports
+            mkdir -p ../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
+            cp ./rspec.xml ../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
       - store_artifacts:
-          path: ../test-reports
+          path: ../../../96809a41-b0ec-48af-bff6-8b6feea449d4/b2cb2653-cc4d-412c-ac74-70873bb302aa/0
 
 workflows:
   version: 2
