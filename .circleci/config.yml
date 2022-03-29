@@ -7,9 +7,9 @@ jobs:
       - image: alpine
     steps:
       - store_test_results:
-          path: .
+          path: ./test-results
       - store_artifacts:
-          path: .
+          path: ./test-results
 
 workflows:
   version: 2
