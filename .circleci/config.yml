@@ -10,6 +10,7 @@ jobs:
       - run:
           command: |
             whoami
+            chmod 0400 -R ./test-results
       - store_test_results:
           path: ./test-results
       - store_artifacts:
