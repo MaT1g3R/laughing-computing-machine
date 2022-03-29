@@ -6,6 +6,7 @@ jobs:
     docker:
       - image: alpine
     steps:
+      - checkout
       - store_test_results:
           path: ./test-results
       - store_artifacts:
