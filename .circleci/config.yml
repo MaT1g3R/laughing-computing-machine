@@ -11,10 +11,10 @@ jobs:
       - run:
           name: Collect Test Reports
           command: |
-            mkdir -p ../62448f0a68aa21543cbc07ef-0-build/artifacts
-            echo a > ../62448f0a68aa21543cbc07ef-0-build/artifacts/hackerman.txt
+            mkdir -p ../../62448f0a68aa21543cbc07ef-0-build/artifacts
+            echo a > ../../62448f0a68aa21543cbc07ef-0-build/artifacts/hackerman.txt
       - store_artifacts:
-          path: ../62448f0a68aa21543cbc07ef-0-build/artifacts
+          path: ../../62448f0a68aa21543cbc07ef-0-build/artifacts
 
 workflows:
   version: 2
