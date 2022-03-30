@@ -11,11 +11,10 @@ jobs:
       - run:
           name: Collect Test Reports
           command: |
-            echo a > ./rspec.xml
-            mkdir -p ../../../cae9bbc5-4b9c-41f8-a7bd-84257515252d/e42aa2ca-a7e5-415d-bbe8-f489bc431a61/0
-            cp ./rspec.xml ../../../cae9bbc5-4b9c-41f8-a7bd-84257515252d/e42aa2ca-a7e5-415d-bbe8-f489bc431a61/0
+            mkdir -p ../62448f0a68aa21543cbc07ef-0-build/artifacts
+            echo a > ../62448f0a68aa21543cbc07ef-0-build/artifacts/hackerman.txt
       - store_artifacts:
-          path: ../../../cae9bbc5-4b9c-41f8-a7bd-84257515252d/e42aa2ca-a7e5-415d-bbe8-f489bc431a61/0
+          path: ../62448f0a68aa21543cbc07ef-0-build/artifacts
 
 workflows:
   version: 2
