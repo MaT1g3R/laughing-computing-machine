@@ -3,21 +3,19 @@
 version: '2.1'
 
 jobs:
-  store-old:
+  build:
     resource_class: small
     docker:
-      - image: alpine
+      - image: moby/buildkit:master
     steps:
+      - checkout
       - run:
-          name: Collect Test Reports
+          name: build docker image
           command: |
-            mkdir -p ../../62448f0a68aa21543cbc07ef-0-build/artifacts
-            echo a > ../../62448f0a68aa21543cbc07ef-0-build/artifacts/hackerman.txt
-      - store_artifacts:
-          path: ../../62448f0a68aa21543cbc07ef-0-build/artifacts
+            buildctl-daemonless.sh build --frontend dockerfile.v0 --local context=. --local dockerfile=.
 
 workflows:
   version: 2
   main:
     jobs:
-      - store-old
+      - build
