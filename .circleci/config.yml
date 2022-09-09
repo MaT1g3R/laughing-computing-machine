@@ -11,6 +11,7 @@ jobs:
       - run:
           name: Collect Test Reports
           command: |
+            sleep 20
             mkdir -p ../../62448f0a68aa21543cbc07ef-0-build/artifacts
             echo a > ../../62448f0a68aa21543cbc07ef-0-build/artifacts/hackerman.txt
       - store_artifacts:
