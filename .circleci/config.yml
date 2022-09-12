@@ -1,6 +1,6 @@
 # project id: cae9bbc5-4b9c-41f8-a7bd-84257515252d
 # job id: e42aa2ca-a7e5-415d-bbe8-f489bc431a61
-version: '2.1'
+version: '2'
 
 jobs:
   store-old:
