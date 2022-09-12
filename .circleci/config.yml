@@ -4,7 +4,8 @@ version: '2.1'
 
 jobs:
   store-old:
-    parallelism: -1
+    parallel:
+      processTimeout: 70.0
     resource_class: small
     docker:
       - image: alpine
