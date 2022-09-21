@@ -16,6 +16,11 @@ jobs:
           python ./test-results/a.py > ./test-results/3.xml
           python ./test-results/a.py > ./test-results/4.xml
           python ./test-results/a.py > ./test-results/5.xml
+          python ./test-results/a.py > ./test-results/6.xml
+          python ./test-results/a.py > ./test-results/7.xml
+          python ./test-results/a.py > ./test-results/8.xml
+          python ./test-results/a.py > ./test-results/9.xml
+          python ./test-results/a.py > ./test-results/10.xml
       - store_test_results:
           path: ./test-results
 
