@@ -11,11 +11,11 @@ jobs:
     steps:
       - checkout
       - run: |
-          python ./test-results/a.py > 1.xml
-          python ./test-results/a.py > 2.xml
-          python ./test-results/a.py > 3.xml
-          python ./test-results/a.py > 4.xml
-          python ./test-results/a.py > 5.xml
+          python ./test-results/a.py > ./test-results/1.xml
+          python ./test-results/a.py > ./test-results/2.xml
+          python ./test-results/a.py > ./test-results/3.xml
+          python ./test-results/a.py > ./test-results/4.xml
+          python ./test-results/a.py > ./test-results/5.xml
       - store_test_results:
           path: ./test-results
 
