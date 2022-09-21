@@ -4,19 +4,14 @@ version: '2'
 
 jobs:
   store-old:
-    parallel:
-      processTimeout: 70.0
+    parallel: 2
     resource_class: small
     docker:
       - image: alpine
     steps:
-      - run:
-          name: Collect Test Reports
-          command: |
-            mkdir -p ../../62448f0a68aa21543cbc07ef-0-build/artifacts
-            echo a > ../../62448f0a68aa21543cbc07ef-0-build/artifacts/hackerman.txt
-      - store_artifacts:
-          path: ../../62448f0a68aa21543cbc07ef-0-build/artifacts
+      - checkout
+      - store_test_results:
+          path: ./test-results
 
 workflows:
   version: 2
