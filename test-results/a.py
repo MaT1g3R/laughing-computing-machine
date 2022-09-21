@@ -17,7 +17,7 @@ def randstring() -> str :
 
     return ''.join(a())
 
-num_tests = random.randint(10000, 100000)
+num_tests = random.randint(10000, 90000)
 
 suite = ET.Element('testsuite', attrib={'name': randstring(), 'tests': str(num_tests), 'failures': str(num_tests), 'errors':'0', 'time': "8.518866" , 'timestamp': "2014-10-28T05:00:31+00:00"})
 prop = ET.SubElement(suite, 'properties')
