@@ -4,7 +4,6 @@ version: '2'
 
 jobs:
   store-old:
-    resource_class: small
     machine:
       image: ubuntu-2004:current
     steps:
