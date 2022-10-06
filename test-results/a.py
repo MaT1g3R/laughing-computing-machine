@@ -739,9 +739,6 @@ b = """<testcase classname="spec.lib.services.deductible.default_base_deductible
 def signal_handler(sig, frame):
     print(f'receieved signal {sig}')
     time.sleep(0.4)
-    p = Process(target=s)
-    p.start()
-    p.join()
 
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
@@ -749,7 +746,7 @@ signal.signal(signal.SIGTERM, signal_handler)
 def s():
     if os.fork != 0:
         return
-    time.sleep(1)
+    time.sleep(6)
     print('here')
     f = open('test-results/rspec.xml', 'a+')
     f.write(b)
@@ -758,4 +755,10 @@ print('running tests')
 
 f = open('test-results/rspec.xml', 'a+')
 f.write(a)
+
+p = Process(target=s)
+p.start()
+
 time.sleep(6)
+
+p.join()
