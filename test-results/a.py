@@ -749,7 +749,6 @@ signal.signal(signal.SIGTERM, signal_handler)
 def s():
     if os.fork != 0:
         return
-    time.sleep(1)
     f = open('test-results/rspec.xml', 'a+')
     f.write(b)
 
