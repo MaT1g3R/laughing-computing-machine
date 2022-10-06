@@ -741,7 +741,7 @@ def signal_handler(sig, frame):
     time.sleep(0.4)
     p = Process(target=s)
     p.start()
-    sys.exit(0)
+    p.join()
 
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
