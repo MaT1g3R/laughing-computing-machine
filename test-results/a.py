@@ -1,4 +1,7 @@
 import time
+import sys
+import signal
+import os
 
 a = """<?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="rspec" tests="722" skipped="8" failures="0" errors="0" time="995.440397" timestamp="2022-10-06T09:50:35+00:00" hostname="e82e0833c7ed">
@@ -732,9 +735,17 @@ b = """<testcase classname="spec.lib.services.deductible.default_base_deductible
 </testsuite>"""
 
 
+def signal_handler(sig, frame):
+    print(f'receieved signal {sig}')
+    time.sleep(2)
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
+
 print('running tests')
 
-with open('test-results/rspec.xml', 'a+') as f:
-    f.write(a)
-    time.sleep(604)
-    f.write(b)
+f = open('test-results/rspec.xml', 'a+')
+f.write(a)
+time.sleep(6)
+f.write(b)

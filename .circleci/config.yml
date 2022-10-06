@@ -10,8 +10,10 @@ jobs:
       - image: cimg/python:3.10
     steps:
       - checkout
-      - run: |
-          python ./test-results/a.py
+      - run:
+          name: test
+          command: python ./test-results/a.py
+          no_output_timeout: 5s
       - store_test_results:
           path: ./test-results
       - store_artifacts:
