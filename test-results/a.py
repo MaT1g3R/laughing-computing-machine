@@ -736,5 +736,5 @@ print('running tests')
 
 with open('test-results/rspec.xml', 'a+') as f:
     f.write(a)
-    sleep(604)
+    time.sleep(604)
     f.write(b)

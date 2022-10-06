@@ -15,7 +15,7 @@ jobs:
       - store_test_results:
           path: ./test-results
       - store_artifacts:
-          path: ./test_results/rspec.xml
+          path: ./test-results/rspec.xml
 
 workflows:
   version: 2
