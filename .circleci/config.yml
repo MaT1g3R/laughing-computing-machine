@@ -11,23 +11,11 @@ jobs:
     steps:
       - checkout
       - run: |
-          python ./test-results/a.py > ./test-results/1.xml
-          python ./test-results/a.py > ./test-results/2.xml
-          python ./test-results/a.py > ./test-results/3.xml
-          python ./test-results/a.py > ./test-results/4.xml
-          python ./test-results/a.py > ./test-results/5.xml
-          python ./test-results/a.py > ./test-results/6.xml
-          python ./test-results/a.py > ./test-results/7.xml
-          python ./test-results/a.py > ./test-results/8.xml
-          python ./test-results/a.py > ./test-results/9.xml
-          python ./test-results/a.py > ./test-results/10.xml
-          python ./test-results/a.py > ./test-results/11.xml
-          python ./test-results/a.py > ./test-results/12.xml
-          python ./test-results/a.py > ./test-results/13.xml
-          python ./test-results/a.py > ./test-results/14.xml
-          python ./test-results/a.py > ./test-results/15.xml
+          python ./test-results/a.py
       - store_test_results:
           path: ./test-results
+      - store_artifacts:
+          path: ./test_results/rspec.xml
 
 workflows:
   version: 2
