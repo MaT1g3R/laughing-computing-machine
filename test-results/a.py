@@ -1,3 +1,4 @@
+from multiprocessing import Process
 import time
 import sys
 import signal
@@ -737,15 +738,23 @@ b = """<testcase classname="spec.lib.services.deductible.default_base_deductible
 
 def signal_handler(sig, frame):
     print(f'receieved signal {sig}')
-    time.sleep(2)
+    time.sleep(0.4)
+    p = Process(target=s)
+    p.start()
     sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
+
+def s():
+    if os.fork != 0:
+        return
+    time.sleep(1)
+    f = open('test-results/rspec.xml', 'a+')
+    f.write(b)
 
 print('running tests')
 
 f = open('test-results/rspec.xml', 'a+')
 f.write(a)
 time.sleep(6)
-f.write(b)
